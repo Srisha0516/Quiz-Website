@@ -1,50 +1,51 @@
 let subject = localStorage.getItem("subject");
 
-// 🛠️ DEFAULT FIX (IMPORTANT)
-if (!subject) {
-    subject = "web"; // fallback
-}
+// fallback if something goes wrong
+if (!subject) subject = "web";
 
-// ✅ REAL QUESTIONS (sample for all subjects)
 let questionBank = {
 
 web: [
-{q:"What is HTML?", options:["Structure","Style","Logic"], ans:0},
-{q:"CSS is used for?", options:["Design","Data","Logic"], ans:0},
-{q:"JS is?", options:["Language","DB","Server"], ans:0},
-{q:"DOM means?", options:["Document Object Model","Data Model","None"], ans:0},
-{q:"API is?", options:["Interface","App","None"], ans:0},
-{q:"Frontend?", options:["UI","DB","Server"], ans:0},
-{q:"Backend?", options:["Server","UI","CSS"], ans:0},
-{q:"Responsive?", options:["Flexible","Fixed","None"], ans:0},
-{q:"HTTP?", options:["Protocol","Code","None"], ans:0},
-{q:"URL?", options:["Address","Code","None"], ans:0}
+{q:"What does HTML stand for?", options:["HyperText Markup Language","Home Tool Markup","Hyperlinks"], ans:0},
+{q:"CSS is used for?", options:["Styling","Logic","Database"], ans:0},
+{q:"JavaScript is?", options:["Programming Language","Database","Server"], ans:0},
+{q:"DOM means?", options:["Document Object Model","Data Object Model","None"], ans:0},
+{q:"API stands for?", options:["Application Programming Interface","App Program","None"], ans:0},
+{q:"Frontend includes?", options:["UI","Server","DB"], ans:0},
+{q:"Backend includes?", options:["Server","UI","CSS"], ans:0},
+{q:"Responsive design means?", options:["Flexible layout","Fixed","None"], ans:0},
+{q:"HTTP is?", options:["Protocol","Language","None"], ans:0},
+{q:"URL means?", options:["Web address","Code","None"], ans:0}
 ],
 
 cn: [
-{q:"IP address?", options:["Identifier","Code","None"], ans:0},
-{q:"HTTP?", options:["Protocol","Lang","None"], ans:0},
-{q:"TCP?", options:["Reliable","Fast","None"], ans:0},
-{q:"UDP?", options:["Fast","Slow","None"], ans:0},
-{q:"DNS?", options:["Domain system","Data","None"], ans:0},
-{q:"Router?", options:["Routes data","Stores","None"], ans:0},
-{q:"LAN?", options:["Local","Wide","None"], ans:0},
-{q:"WAN?", options:["Wide","Local","None"], ans:0},
-{q:"Firewall?", options:["Security","Speed","None"], ans:0},
-{q:"Protocol?", options:["Rules","Code","None"], ans:0}
+{q:"IP address is?", options:["Unique identifier","Code","None"], ans:0},
+{q:"HTTP is?", options:["Protocol","Language","None"], ans:0},
+{q:"TCP is?", options:["Reliable","Fast","None"], ans:0},
+{q:"UDP is?", options:["Fast","Slow","None"], ans:0},
+{q:"DNS stands for?", options:["Domain Name System","Data Network","None"], ans:0},
+{q:"Router does?", options:["Routes data","Stores","None"], ans:0},
+{q:"LAN is?", options:["Local Area Network","Wide","None"], ans:0},
+{q:"WAN is?", options:["Wide Area Network","Local","None"], ans:0},
+{q:"Firewall is?", options:["Security","Speed","None"], ans:0},
+{q:"Protocol means?", options:["Rules","Data","None"], ans:0}
 ],
 
-python: Array(10).fill({q:"Python question", options:["A","B","C"], ans:0}),
-db: Array(10).fill({q:"DB question", options:["A","B","C"], ans:0}),
-java: Array(10).fill({q:"Java question", options:["A","B","C"], ans:0}),
-js: Array(10).fill({q:"JS question", options:["A","B","C"], ans:0}),
-os: Array(10).fill({q:"OS question", options:["A","B","C"], ans:0}),
-ds: Array(10).fill({q:"DS question", options:["A","B","C"], ans:0})
+python: Array(10).fill({q:"Python Question", options:["A","B","C"], ans:0}),
+db: Array(10).fill({q:"DB Question", options:["A","B","C"], ans:0}),
+java: Array(10).fill({q:"Java Question", options:["A","B","C"], ans:0}),
+js: Array(10).fill({q:"JS Question", options:["A","B","C"], ans:0}),
+os: Array(10).fill({q:"OS Question", options:["A","B","C"], ans:0}),
+ds: Array(10).fill({q:"DS Question", options:["A","B","C"], ans:0})
 
 };
 
-// 🛠️ SAFE FALLBACK
-let questions = questionBank[subject] || questionBank["web"];
+// 🔥 IMPORTANT FIX
+let questions = questionBank[subject];
+
+if (!questions) {
+    questions = questionBank["web"];
+}
 
 let currentQ = 0;
 let score = 0;
@@ -53,19 +54,24 @@ let userAnswers = [];
 document.getElementById("title").innerText =
     "Subject: " + subject.toUpperCase();
 
-// 🚀 START QUIZ
+// START
 function startQuiz() {
     document.getElementById("instructions").style.display = "none";
     document.getElementById("quiz").style.display = "block";
-
     showQuestion();
     startTimer();
 }
 
-// 🎯 SHOW QUESTION
+// SHOW QUESTION
 function showQuestion() {
 
     let q = questions[currentQ];
+
+    // 🔴 SAFETY CHECK
+    if (!q) {
+        document.getElementById("questionBox").innerText = "Error loading question!";
+        return;
+    }
 
     document.getElementById("progressText").innerText =
         "Question " + (currentQ + 1) + " / 10";
@@ -85,7 +91,7 @@ function showQuestion() {
     document.getElementById("optionsBox").innerHTML = optionsHTML;
 }
 
-// ➡️ NEXT
+// NEXT
 function nextQuestion() {
 
     let selected = document.querySelector('input[name="option"]:checked');
@@ -106,7 +112,7 @@ function nextQuestion() {
     }
 }
 
-// 🧠 SUBMIT
+// SUBMIT
 function submitQuiz() {
 
     questions.forEach((q, i) => {
@@ -117,7 +123,7 @@ function submitQuiz() {
     window.location.href = "result.html";
 }
 
-// ⏱️ TIMER
+// TIMER
 let time = 60;
 
 function startTimer() {
