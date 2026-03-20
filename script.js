@@ -1,3 +1,20 @@
+let timeLeft = 60;
+let timer = document.getElementById("timer");
+let progress = document.getElementById("progress");
+
+let interval = setInterval(() => {
+    timeLeft--;
+    timer.innerText = "⏱️ Time Left: " + timeLeft + "s";
+
+    progress.style.width = ((60 - timeLeft) / 60) * 100 + "%";
+
+    if (timeLeft <= 0) {
+        clearInterval(interval);
+        checkAnswers();
+    }
+}, 1000);
+
+
 function checkAnswers() {
 
     let score = 0;
@@ -16,13 +33,9 @@ function checkAnswers() {
 
     let message = "";
 
-    if (score === 5) {
-        message = "🔥 Excellent! You're a pro developer!";
-    } else if (score >= 3) {
-        message = "👏 Good job! Keep improving!";
-    } else {
-        message = "📚 Keep learning, you’ll get there!";
-    }
+    if (score === 5) message = "🔥 Pro Developer!";
+    else if (score >= 3) message = "👏 Good job!";
+    else message = "📚 Keep learning!";
 
     document.getElementById("result").innerText =
         "You scored " + score + "/5";
