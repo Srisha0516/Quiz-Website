@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Quiz</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<h2 id="title"></h2>
+
+<div id="instructions" class="box">
+    <p>⏱️ 60 seconds</p>
+    <p>📌 10 questions</p>
+    <button onclick="startQuiz()">Start Quiz</button>
+</div>
+
+<div id="quiz" class="box" style="display:none;">
+    <h3 id="timer"></h3>
+    <div id="questions"></div>
+    <button onclick="submitQuiz()">Submit</button>
+</div>
+
+<script src="script.js"></script>
+
+</body>
+</html>
