@@ -1,44 +1,75 @@
-let timeLeft = 60;
-let timer = document.getElementById("timer");
-let progress = document.getElementById("progress");
+let subject = localStorage.getItem("subject");
 
-let interval = setInterval(() => {
-    timeLeft--;
-    timer.innerText = "⏱️ Time Left: " + timeLeft + "s";
+let questionBank = {
 
-    progress.style.width = ((60 - timeLeft) / 60) * 100 + "%";
+web: [
+    {q:"REST stands for?", options:["Representational State Transfer","Remote Execution","Runtime State"], ans:0},
+    {q:"HTTP method to update?", options:["GET","POST","PUT"], ans:2}
+],
 
-    if (timeLeft <= 0) {
-        clearInterval(interval);
-        checkAnswers();
-    }
-}, 1000);
+python: [
+    {q:"Python is?", options:["Compiled","Interpreted","Both"], ans:1},
+    {q:"Keyword for function?", options:["def","func","function"], ans:0}
+],
 
+db: [
+    {q:"Primary key?", options:["Unique","Duplicate","Null"], ans:0},
+    {q:"SQL stands for?", options:["Structured Query Language","Simple Query","None"], ans:0}
+]
 
-function checkAnswers() {
+};
+
+document.getElementById("title").innerText =
+    "Subject: " + subject.toUpperCase();
+
+let questions = questionBank[subject];
+
+function startQuiz() {
+    document.getElementById("instructions").style.display = "none";
+    document.getElementById("quiz").style.display = "block";
+    loadQuestions();
+    startTimer();
+}
+
+function loadQuestions() {
+    let container = document.getElementById("questions");
+
+    questions.forEach((q, i) => {
+        container.innerHTML += `<p>${i+1}. ${q.q}</p>` +
+        q.options.map((opt, j) =>
+            `<input type="radio" name="q${i}" value="${j}">${opt}<br>`
+        ).join("");
+    });
+}
+
+let time = 60;
+
+function startTimer() {
+    let t = setInterval(() => {
+        time--;
+        document.getElementById("timer").innerText = "⏱️ Time: " + time;
+
+        if (time <= 0) {
+            clearInterval(t);
+            submitQuiz(true);
+        }
+    },1000);
+}
+
+function submitQuiz(timeout=false) {
 
     let score = 0;
 
-    let q1 = document.querySelector('input[name="q1"]:checked');
-    let q2 = document.querySelector('input[name="q2"]:checked');
-    let q3 = document.querySelector('input[name="q3"]:checked');
-    let q4 = document.querySelector('input[name="q4"]:checked');
-    let q5 = document.querySelector('input[name="q5"]:checked');
+    questions.forEach((q,i)=>{
+        let ans = document.querySelector(`input[name="q${i}"]:checked`);
+        if(ans && ans.value == q.ans) score++;
+    });
 
-    if (q1 && q1.value === "a") score++;
-    if (q2 && q2.value === "c") score++;
-    if (q3 && q3.value === "b") score++;
-    if (q4 && q4.value === "b") score++;
-    if (q5 && q5.value === "a") score++;
+    localStorage.setItem("score", score);
 
-    let message = "";
+    if(timeout){
+        alert("⛔ Time's up!");
+    }
 
-    if (score === 5) message = "🔥 Pro Developer!";
-    else if (score >= 3) message = "👏 Good job!";
-    else message = "📚 Keep learning!";
-
-    document.getElementById("result").innerText =
-        "You scored " + score + "/5";
-
-    document.getElementById("message").innerText = message;
+    window.location.href = "result.html";
 }
