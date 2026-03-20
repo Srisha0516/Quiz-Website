@@ -1,69 +1,38 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Software Quiz</title>
+    <title>Quiz App</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<div class="quiz-container">
+<h1 class="title">🎯 Choose Your Quiz</h1>
 
-    <h1>💻 Software Quiz</h1>
-    <p class="subtitle">Test your dev skills 🚀</p>
+<div class="card-container">
 
-    <!-- Timer -->
-    <div id="timer">⏱️ Time Left: 60s</div>
-
-    <!-- Progress -->
-    <div class="progress-bar">
-        <div id="progress"></div>
+    <div class="card" onclick="startQuiz('web')">
+        <h2>🌐 Web Dev</h2>
+        <p>HTML, CSS, JS</p>
     </div>
 
-    <!-- Questions -->
-    <div class="question-card">
-        <p>1. REST stands for?</p>
-        <label><input type="radio" name="q1" value="a"> Representational State Transfer</label>
-        <label><input type="radio" name="q1" value="b"> Remote Execution</label>
-        <label><input type="radio" name="q1" value="c"> Runtime State</label>
+    <div class="card" onclick="startQuiz('python')">
+        <h2>🐍 Python</h2>
+        <p>Basics & Logic</p>
     </div>
 
-    <div class="question-card">
-        <p>2. HTTP method to update data?</p>
-        <label><input type="radio" name="q2" value="a"> GET</label>
-        <label><input type="radio" name="q2" value="b"> POST</label>
-        <label><input type="radio" name="q2" value="c"> PUT</label>
-    </div>
-
-    <div class="question-card">
-        <p>3. JS runtime?</p>
-        <label><input type="radio" name="q3" value="a"> React</label>
-        <label><input type="radio" name="q3" value="b"> Node.js</label>
-        <label><input type="radio" name="q3" value="c"> Angular</label>
-    </div>
-
-    <div class="question-card">
-        <p>4. Primary key?</p>
-        <label><input type="radio" name="q4" value="a"> Duplicate</label>
-        <label><input type="radio" name="q4" value="b"> Unique identifier</label>
-        <label><input type="radio" name="q4" value="c"> Delete key</label>
-    </div>
-
-    <div class="question-card">
-        <p>5. Version control tool?</p>
-        <label><input type="radio" name="q5" value="a"> Git</label>
-        <label><input type="radio" name="q5" value="b"> Docker</label>
-        <label><input type="radio" name="q5" value="c"> Jenkins</label>
-    </div>
-
-    <button onclick="checkAnswers()" class="submit-btn">🚀 Submit</button>
-
-    <div id="result-box">
-        <h2 id="result"></h2>
-        <p id="message"></p>
+    <div class="card" onclick="startQuiz('db')">
+        <h2>🗄️ Database</h2>
+        <p>SQL & Keys</p>
     </div>
 
 </div>
 
-<script src="script.js"></script>
+<script>
+function startQuiz(subject) {
+    localStorage.setItem("subject", subject);
+    window.location.href = "quiz.html";
+}
+</script>
+
 </body>
 </html>
