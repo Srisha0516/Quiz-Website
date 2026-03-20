@@ -1,23 +1,50 @@
 let subject = localStorage.getItem("subject");
 
+// 🛠️ DEFAULT FIX (IMPORTANT)
+if (!subject) {
+    subject = "web"; // fallback
+}
+
+// ✅ REAL QUESTIONS (sample for all subjects)
 let questionBank = {
+
 web: [
-{q:"REST stands for?", options:["Representational State Transfer","Remote Execution","Runtime State"], ans:0},
-{q:"HTTP method to update?", options:["GET","POST","PUT"], ans:2},
-{q:"HTML used for?", options:["Structure","Style","Logic"], ans:0},
-{q:"CSS used for?", options:["Logic","Design","Database"], ans:1},
-{q:"JS is?", options:["Backend only","Frontend only","Both"], ans:2},
-{q:"DOM stands for?", options:["Document Object Model","Data Object Model","None"], ans:0},
-{q:"API is?", options:["Interface","Database","Server"], ans:0},
-{q:"Frontend includes?", options:["HTML","SQL","Java"], ans:0},
-{q:"Backend includes?", options:["Python","CSS","HTML"], ans:0},
-{q:"Responsive design?", options:["Fixed","Adaptive","Dynamic"], ans:2}
+{q:"What is HTML?", options:["Structure","Style","Logic"], ans:0},
+{q:"CSS is used for?", options:["Design","Data","Logic"], ans:0},
+{q:"JS is?", options:["Language","DB","Server"], ans:0},
+{q:"DOM means?", options:["Document Object Model","Data Model","None"], ans:0},
+{q:"API is?", options:["Interface","App","None"], ans:0},
+{q:"Frontend?", options:["UI","DB","Server"], ans:0},
+{q:"Backend?", options:["Server","UI","CSS"], ans:0},
+{q:"Responsive?", options:["Flexible","Fixed","None"], ans:0},
+{q:"HTTP?", options:["Protocol","Code","None"], ans:0},
+{q:"URL?", options:["Address","Code","None"], ans:0}
 ],
 
-// (you can keep other subjects same as before)
+cn: [
+{q:"IP address?", options:["Identifier","Code","None"], ans:0},
+{q:"HTTP?", options:["Protocol","Lang","None"], ans:0},
+{q:"TCP?", options:["Reliable","Fast","None"], ans:0},
+{q:"UDP?", options:["Fast","Slow","None"], ans:0},
+{q:"DNS?", options:["Domain system","Data","None"], ans:0},
+{q:"Router?", options:["Routes data","Stores","None"], ans:0},
+{q:"LAN?", options:["Local","Wide","None"], ans:0},
+{q:"WAN?", options:["Wide","Local","None"], ans:0},
+{q:"Firewall?", options:["Security","Speed","None"], ans:0},
+{q:"Protocol?", options:["Rules","Code","None"], ans:0}
+],
+
+python: Array(10).fill({q:"Python question", options:["A","B","C"], ans:0}),
+db: Array(10).fill({q:"DB question", options:["A","B","C"], ans:0}),
+java: Array(10).fill({q:"Java question", options:["A","B","C"], ans:0}),
+js: Array(10).fill({q:"JS question", options:["A","B","C"], ans:0}),
+os: Array(10).fill({q:"OS question", options:["A","B","C"], ans:0}),
+ds: Array(10).fill({q:"DS question", options:["A","B","C"], ans:0})
+
 };
 
-let questions = questionBank[subject];
+// 🛠️ SAFE FALLBACK
+let questions = questionBank[subject] || questionBank["web"];
 
 let currentQ = 0;
 let score = 0;
@@ -26,6 +53,7 @@ let userAnswers = [];
 document.getElementById("title").innerText =
     "Subject: " + subject.toUpperCase();
 
+// 🚀 START QUIZ
 function startQuiz() {
     document.getElementById("instructions").style.display = "none";
     document.getElementById("quiz").style.display = "block";
@@ -34,13 +62,13 @@ function startQuiz() {
     startTimer();
 }
 
-// 🎯 SHOW ONE QUESTION
+// 🎯 SHOW QUESTION
 function showQuestion() {
 
     let q = questions[currentQ];
 
     document.getElementById("progressText").innerText =
-        "Question " + (currentQ + 1) + " / " + questions.length;
+        "Question " + (currentQ + 1) + " / 10";
 
     document.getElementById("questionBox").innerText = q.q;
 
@@ -51,13 +79,13 @@ function showQuestion() {
         <label>
             <input type="radio" name="option" value="${i}">
             ${opt}
-        </label><br>`;
+        </label>`;
     });
 
     document.getElementById("optionsBox").innerHTML = optionsHTML;
 }
 
-// ➡️ NEXT QUESTION
+// ➡️ NEXT
 function nextQuestion() {
 
     let selected = document.querySelector('input[name="option"]:checked');
