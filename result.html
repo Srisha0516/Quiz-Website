@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Result</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="box">
+    <h1 id="score"></h1>
+    <p id="message"></p>
+    <button onclick="goHome()">🏠 Home</button>
+</div>
+
+<script>
+let score = localStorage.getItem("score");
+
+document.getElementById("score").innerText =
+    "🎯 Score: " + score + "/10";
+
+document.getElementById("message").innerText =
+    score >= 7 ? "🔥 Excellent!" :
+    score >= 4 ? "👏 Good job!" :
+    "📚 Keep learning!";
+
+function goHome() {
+    window.location.href = "index.html";
+}
+</script>
+
+</body>
+</html>
