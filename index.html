@@ -1,30 +1,45 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Quiz App</title>
-    <link rel="stylesheet" href="style.css">
+<title>Login</title>
+<style>
+body{font-family:sans-serif;background:#0f172a;color:white;text-align:center}
+.box{margin-top:100px}
+input{padding:10px;margin:10px;border-radius:8px;border:none}
+button{padding:10px 20px;border:none;border-radius:8px;background:#22c55e;color:white}
+</style>
 </head>
 <body>
 
-<h1 class="title">🎯 Choose Your Quiz</h1>
+<div class="box">
+<h2>Login / Register</h2>
 
-<div class="card-container">
+<input id="user" placeholder="Username"><br>
+<input id="pass" type="password" placeholder="Password"><br>
 
-    <div class="card" onclick="startQuiz('web')"><h2>🌐 Web</h2></div>
-    <div class="card" onclick="startQuiz('python')"><h2>🐍 Python</h2></div>
-    <div class="card" onclick="startQuiz('db')"><h2>🗄️ DB</h2></div>
-    <div class="card" onclick="startQuiz('java')"><h2>☕ Java</h2></div>
-    <div class="card" onclick="startQuiz('js')"><h2>⚡ JS</h2></div>
-    <div class="card" onclick="startQuiz('os')"><h2>💻 OS</h2></div>
-    <div class="card" onclick="startQuiz('cn')"><h2>🌍 CN</h2></div>
-    <div class="card" onclick="startQuiz('ds')"><h2>📊 DS</h2></div>
-
+<button onclick="register()">Register</button>
+<button onclick="login()">Login</button>
 </div>
 
 <script>
-function startQuiz(subject) {
-    localStorage.setItem("subject", subject);
-    window.location.href = "quiz.html";
+function register(){
+let u=document.getElementById("user").value;
+let p=document.getElementById("pass").value;
+
+localStorage.setItem(u,p);
+alert("Registered Successfully!");
+}
+
+function login(){
+let u=document.getElementById("user").value;
+let p=document.getElementById("pass").value;
+
+if(localStorage.getItem(u) === p){
+localStorage.setItem("currentUser",u);
+window.location = "dashboard.html";
+}else{
+alert("Invalid login!");
+}
 }
 </script>
 
