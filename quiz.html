@@ -20,13 +20,14 @@ background:#1e293b;
 padding:30px;
 border-radius:20px;
 width:90%;
-max-width:600px;
+max-width:650px;
 box-shadow:0 0 25px rgba(0,0,0,0.5);
 text-align:center;
 }
 
 h2{
 margin-bottom:20px;
+line-height:1.4;
 }
 
 .option{
@@ -68,6 +69,7 @@ cursor:pointer;
 
 let bank = {
 
+// 🌐 WEB
 web:[
 {q:"What is the primary purpose of HTML in web development?",o:["To structure content on the web","To style web pages","To manage databases"],a:0},
 {q:"Which technology is mainly responsible for styling web pages?",o:["CSS","JavaScript","Python"],a:0},
@@ -79,6 +81,104 @@ web:[
 {q:"Which part handles server logic?",o:["Backend","Frontend","UI"],a:0},
 {q:"What is a URL?",o:["Web address","Code","Database"],a:0},
 {q:"Which language structures web content?",o:["HTML","CSS","SQL"],a:0}
+],
+
+// 🐍 PYTHON
+python:[
+{q:"What type of language is Python?",o:["Interpreted","Compiled","Assembly"],a:0},
+{q:"Which keyword is used to define a function in Python?",o:["def","function","func"],a:0},
+{q:"Which data type is mutable?",o:["List","Tuple","String"],a:0},
+{q:"What is indentation used for in Python?",o:["Defining code blocks","Styling","Debugging"],a:0},
+{q:"Which function is used to display output?",o:["print()","echo()","log()"],a:0},
+{q:"What is a tuple?",o:["Immutable collection","Mutable list","Loop"],a:0},
+{q:"Which keyword is used for conditions?",o:["if","for","def"],a:0},
+{q:"Which operator checks equality?",o:["==","=","!="],a:0},
+{q:"Which file extension is used?",o:[".py",".js",".java"],a:0},
+{q:"What is Python mainly used for?",o:["Automation & AI","Only web design","Only gaming"],a:0}
+],
+
+// 🗄️ DATABASE
+db:[
+{q:"What does SQL stand for?",o:["Structured Query Language","Simple Query Language","Sequential Query"],a:0},
+{q:"What is a primary key?",o:["Unique identifier","Duplicate value","Optional field"],a:0},
+{q:"Which command is used to fetch data?",o:["SELECT","GET","FETCH"],a:0},
+{q:"Which command adds data?",o:["INSERT","ADD","PUT"],a:0},
+{q:"Which command deletes data?",o:["DELETE","REMOVE","DROP"],a:0},
+{q:"What is a row in a table?",o:["Record","Column","Field"],a:0},
+{q:"What is a column?",o:["Field","Row","Data"],a:0},
+{q:"What is DBMS?",o:["Database Management System","Data Backup","None"],a:0},
+{q:"Foreign key is used to?",o:["Link tables","Delete data","Sort"],a:0},
+{q:"Which clause filters data?",o:["WHERE","IF","FOR"],a:0}
+],
+
+// ☕ JAVA
+java:[
+{q:"Java is which type of language?",o:["Compiled & Interpreted","Only compiled","Only scripting"],a:0},
+{q:"Which method is the entry point?",o:["main()","start()","run()"],a:0},
+{q:"What does OOP stand for?",o:["Object Oriented Programming","Only Programming","Open Program"],a:0},
+{q:"What is a class?",o:["Blueprint for objects","Function","Variable"],a:0},
+{q:"What is an object?",o:["Instance of class","Function","Loop"],a:0},
+{q:"Inheritance is used for?",o:["Code reuse","Deletion","Looping"],a:0},
+{q:"Polymorphism means?",o:["Many forms","One form","No form"],a:0},
+{q:"Encapsulation means?",o:["Wrapping data","Deleting data","Loop"],a:0},
+{q:"Abstraction hides?",o:["Implementation details","Data","Loops"],a:0},
+{q:"Java file extension?",o:[".java",".py",".js"],a:0}
+],
+
+// ⚡ JS
+js:[
+{q:"JavaScript is used for?",o:["Interactivity","Styling","Database"],a:0},
+{q:"Which keyword declares variable?",o:["let","int","var"],a:0},
+{q:"Function keyword?",o:["function","def","func"],a:0},
+{q:"Array uses?",o:["[]","{}","()"],a:0},
+{q:"Object uses?",o:["{}","[]","()"],a:0},
+{q:"Console output?",o:["console.log","print","echo"],a:0},
+{q:"Event example?",o:["click","loop","if"],a:0},
+{q:"DOM is used for?",o:["Control HTML","CSS","DB"],a:0},
+{q:"Promise is?",o:["Async handling","Loop","Variable"],a:0},
+{q:"File extension?",o:[".js",".py",".java"],a:0}
+],
+
+// 💻 OS
+os:[
+{q:"What does OS stand for?",o:["Operating System","Open System","Order System"],a:0},
+{q:"Which is an OS?",o:["Windows","HTML","CSS"],a:0},
+{q:"Process means?",o:["Running program","File","Data"],a:0},
+{q:"Thread is?",o:["Part of process","Whole process","None"],a:0},
+{q:"RAM is?",o:["Memory","CPU","Disk"],a:0},
+{q:"Kernel is?",o:["Core of OS","App","None"],a:0},
+{q:"Multitasking means?",o:["Many tasks","One task","None"],a:0},
+{q:"Booting means?",o:["Starting OS","Stopping","Restart"],a:0},
+{q:"File system manages?",o:["Files","CPU","Memory"],a:0},
+{q:"Scheduling is?",o:["CPU management","Storage","Network"],a:0}
+],
+
+// 🌍 CN
+cn:[
+{q:"What is an IP address?",o:["Unique identifier","Code","Name"],a:0},
+{q:"HTTP is?",o:["Protocol","Language","Tool"],a:0},
+{q:"TCP is?",o:["Reliable protocol","Unreliable","None"],a:0},
+{q:"UDP is?",o:["Fast but unreliable","Slow","None"],a:0},
+{q:"DNS does?",o:["Resolves domain names","Stores data","Encrypts"],a:0},
+{q:"Router is used for?",o:["Routing data","Storage","Design"],a:0},
+{q:"LAN means?",o:["Local Area Network","Wide","None"],a:0},
+{q:"WAN means?",o:["Wide Area Network","Local","None"],a:0},
+{q:"Firewall provides?",o:["Security","Speed","None"],a:0},
+{q:"Protocol means?",o:["Set of rules","Code","Tool"],a:0}
+],
+
+// 📊 DS
+ds:[
+{q:"What is Data Structure?",o:["Organizing data","Deleting data","Loop"],a:0},
+{q:"Array is?",o:["Linear","Non-linear","None"],a:0},
+{q:"Stack follows?",o:["LIFO","FIFO","None"],a:0},
+{q:"Queue follows?",o:["FIFO","LIFO","None"],a:0},
+{q:"Linked list uses?",o:["Nodes","Array","None"],a:0},
+{q:"Tree is?",o:["Hierarchical","Linear","None"],a:0},
+{q:"Graph has?",o:["Nodes & edges","Array","None"],a:0},
+{q:"Searching means?",o:["Finding data","Deleting","Sorting"],a:0},
+{q:"Sorting means?",o:["Arranging data","Deleting","Searching"],a:0},
+{q:"Algorithm is?",o:["Step-by-step solution","Code","Loop"],a:0}
 ]
 
 };
@@ -89,7 +189,6 @@ let qs = bank[s];
 let i = 0;
 let score = 0;
 
-// Shuffle
 function shuffle(arr){
 for(let i=arr.length-1;i>0;i--){
 let j=Math.floor(Math.random()*(i+1));
