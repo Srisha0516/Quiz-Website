@@ -1,31 +1,99 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Quiz</title>
-    <link rel="stylesheet" href="style.css">
+<title>Quiz</title>
+<style>
+body{background:#111827;color:white;text-align:center;font-family:sans-serif}
+button{padding:10px 20px;margin:10px}
+</style>
 </head>
 <body>
 
-<h2 id="title"></h2>
+<h2 id="q"></h2>
+<div id="opt"></div>
 
-<div id="instructions" class="box">
-    <p>⏱️ 60 seconds</p>
-    <p>📌 10 questions</p>
-    <button onclick="startQuiz()">Start Quiz</button>
-</div>
+<button onclick="next()">Next</button>
 
-<div id="quiz" class="box" style="display:none;">
+<script>
 
-    <h3 id="timer"></h3>
-    <h3 id="progressText"></h3>
+let bank = {
+web:[
+{q:"HTML stands for?",o:["HyperText Markup Language","HighText Machine","Tool"],a:0},
+{q:"CSS is used for?",o:["Styling","Programming","Database"],a:0},
+{q:"JS is?",o:["Programming Language","Styling","Database"],a:0},
+{q:"DOM means?",o:["Document Object Model","Data Model","None"],a:0},
+{q:"API?",o:["Application Programming Interface","App Program","None"],a:0},
+{q:"Frontend?",o:["UI","Server","DB"],a:0},
+{q:"Backend?",o:["Server","UI","CSS"],a:0},
+{q:"Responsive?",o:["Flexible UI","Fixed","None"],a:0},
+{q:"HTTP?",o:["Protocol","Language","None"],a:0},
+{q:"URL?",o:["Web address","Code","None"],a:0}
+],
 
-    <div id="questionBox"></div>
-    <div id="optionsBox"></div>
+python:[
+{q:"Python is?",o:["Interpreted","Compiled","None"],a:0},
+{q:"Function keyword?",o:["def","func","method"],a:0},
+{q:"List?",o:["Mutable","Immutable","None"],a:0},
+{q:"Tuple?",o:["Immutable","Mutable","None"],a:0},
+{q:"Loop?",o:["for","loop","repeat"],a:0},
+{q:"Condition?",o:["if","loop","def"],a:0},
+{q:"Import?",o:["import","include","use"],a:0},
+{q:"Indentation?",o:["Mandatory","Optional","None"],a:0},
+{q:"Extension?",o:[".py",".js",".java"],a:0},
+{q:"Output?",o:["print()","echo()","log()"],a:0}
+]
+};
 
-    <button onclick="nextQuestion()">Next ➡️</button>
+let s = localStorage.getItem("subject") || "web";
+let qs = bank[s];
 
-</div>
+let i = 0, score = 0;
 
-<script src="script.js"></script>
+function shuffle(arr){
+for(let i=arr.length-1;i>0;i--){
+let j=Math.floor(Math.random()*(i+1));
+[arr[i],arr[j]]=[arr[j],arr[i]];
+}
+return arr;
+}
+
+function load(){
+let cur = qs[i];
+document.getElementById("q").innerText = cur.q;
+
+let ops = [...cur.o];
+shuffle(ops);
+
+let html = "";
+ops.forEach(v=>{
+html += `<div><input type='radio' name='o' value='${v}'> ${v}</div>`;
+});
+
+document.getElementById("opt").innerHTML = html;
+}
+
+function next(){
+let sel = document.querySelector("input[name='o']:checked");
+if(!sel) return alert("Select an answer");
+
+let cur = qs[i];
+let correct = cur.o[cur.a];
+
+if(sel.value === correct) score++;
+
+i++;
+
+if(i < qs.length){
+load();
+}else{
+localStorage.setItem("score", score);
+window.location = "result.html";
+}
+}
+
+load();
+
+</script>
+
 </body>
 </html>
