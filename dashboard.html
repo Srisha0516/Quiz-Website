@@ -1,1 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Dashboard</title>
+<style>
+body{font-family:sans-serif;background:#020617;color:white;text-align:center}
+button{padding:10px;margin:10px;border:none;border-radius:8px;background:#3b82f6;color:white}
+</style>
+</head>
+<body>
 
+<h2 id="welcome"></h2>
+<p>Your Last Score: <span id="score"></span></p>
+
+<h3>Select Subject</h3>
+
+<button onclick="start('web')">Web Dev</button>
+<button onclick="start('python')">Python</button>
+<button onclick="start('db')">DB</button>
+<button onclick="start('java')">Java</button>
+<button onclick="start('js')">JavaScript</button>
+<button onclick="start('os')">OS</button>
+<button onclick="start('cn')">CN</button>
+<button onclick="start('ds')">DS</button>
+
+<br><br>
+<button onclick="logout()">Logout</button>
+
+<script>
+let user = localStorage.getItem("currentUser");
+
+if(!user){
+window.location = "index.html";
+}
+
+document.getElementById("welcome").innerText = "Welcome " + user;
+document.getElementById("score").innerText =
+localStorage.getItem("score") || 0;
+
+function start(sub){
+localStorage.setItem("subject", sub);
+window.location = "quiz.html";
+}
+
+function logout(){
+localStorage.removeItem("currentUser");
+window.location = "index.html";
+}
+</script>
+
+</body>
+</html>
