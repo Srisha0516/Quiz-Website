@@ -2,53 +2,94 @@
 <html>
 <head>
 <title>Quiz</title>
+
 <style>
-body{background:#111827;color:white;text-align:center;font-family:sans-serif}
-button{padding:10px 20px;margin:10px}
+body{
+margin:0;
+font-family:'Segoe UI';
+background:linear-gradient(135deg,#020617,#1e293b);
+color:white;
+display:flex;
+justify-content:center;
+align-items:center;
+height:100vh;
+}
+
+.quiz-box{
+background:#1e293b;
+padding:30px;
+border-radius:20px;
+width:90%;
+max-width:600px;
+box-shadow:0 0 25px rgba(0,0,0,0.5);
+text-align:center;
+}
+
+h2{
+margin-bottom:20px;
+}
+
+.option{
+background:#334155;
+padding:12px;
+margin:10px 0;
+border-radius:10px;
+cursor:pointer;
+transition:0.3s;
+}
+
+.option:hover{
+background:#3b82f6;
+}
+
+button{
+margin-top:20px;
+padding:12px 20px;
+border:none;
+border-radius:10px;
+background:#22c55e;
+color:white;
+font-size:16px;
+cursor:pointer;
+}
 </style>
+
 </head>
+
 <body>
 
+<div class="quiz-box">
 <h2 id="q"></h2>
 <div id="opt"></div>
-
 <button onclick="next()">Next</button>
+</div>
 
 <script>
 
 let bank = {
-web:[
-{q:"HTML stands for?",o:["HyperText Markup Language","HighText Machine","Tool"],a:0},
-{q:"CSS is used for?",o:["Styling","Programming","Database"],a:0},
-{q:"JS is?",o:["Programming Language","Styling","Database"],a:0},
-{q:"DOM means?",o:["Document Object Model","Data Model","None"],a:0},
-{q:"API?",o:["Application Programming Interface","App Program","None"],a:0},
-{q:"Frontend?",o:["UI","Server","DB"],a:0},
-{q:"Backend?",o:["Server","UI","CSS"],a:0},
-{q:"Responsive?",o:["Flexible UI","Fixed","None"],a:0},
-{q:"HTTP?",o:["Protocol","Language","None"],a:0},
-{q:"URL?",o:["Web address","Code","None"],a:0}
-],
 
-python:[
-{q:"Python is?",o:["Interpreted","Compiled","None"],a:0},
-{q:"Function keyword?",o:["def","func","method"],a:0},
-{q:"List?",o:["Mutable","Immutable","None"],a:0},
-{q:"Tuple?",o:["Immutable","Mutable","None"],a:0},
-{q:"Loop?",o:["for","loop","repeat"],a:0},
-{q:"Condition?",o:["if","loop","def"],a:0},
-{q:"Import?",o:["import","include","use"],a:0},
-{q:"Indentation?",o:["Mandatory","Optional","None"],a:0},
-{q:"Extension?",o:[".py",".js",".java"],a:0},
-{q:"Output?",o:["print()","echo()","log()"],a:0}
+web:[
+{q:"What is the primary purpose of HTML in web development?",o:["To structure content on the web","To style web pages","To manage databases"],a:0},
+{q:"Which technology is mainly responsible for styling web pages?",o:["CSS","JavaScript","Python"],a:0},
+{q:"What role does JavaScript play in a website?",o:["Adds interactivity","Stores data","Design layout"],a:0},
+{q:"What does DOM stand for?",o:["Document Object Model","Data Object Model","Digital Object Method"],a:0},
+{q:"Which protocol is used to transfer web pages?",o:["HTTP","FTP","SMTP"],a:0},
+{q:"What is a responsive website?",o:["Adapts to all devices","Loads faster","Has animations"],a:0},
+{q:"What is an API used for?",o:["Communication between systems","Design UI","Store files"],a:0},
+{q:"Which part handles server logic?",o:["Backend","Frontend","UI"],a:0},
+{q:"What is a URL?",o:["Web address","Code","Database"],a:0},
+{q:"Which language structures web content?",o:["HTML","CSS","SQL"],a:0}
 ]
+
 };
 
 let s = localStorage.getItem("subject") || "web";
 let qs = bank[s];
 
-let i = 0, score = 0;
+let i = 0;
+let score = 0;
 
+// Shuffle
 function shuffle(arr){
 for(let i=arr.length-1;i>0;i--){
 let j=Math.floor(Math.random()*(i+1));
@@ -59,6 +100,7 @@ return arr;
 
 function load(){
 let cur = qs[i];
+
 document.getElementById("q").innerText = cur.q;
 
 let ops = [...cur.o];
@@ -66,7 +108,9 @@ shuffle(ops);
 
 let html = "";
 ops.forEach(v=>{
-html += `<div><input type='radio' name='o' value='${v}'> ${v}</div>`;
+html += `<div class="option">
+<input type='radio' name='o' value='${v}'> ${v}
+</div>`;
 });
 
 document.getElementById("opt").innerHTML = html;
@@ -74,12 +118,18 @@ document.getElementById("opt").innerHTML = html;
 
 function next(){
 let sel = document.querySelector("input[name='o']:checked");
-if(!sel) return alert("Select an answer");
+
+if(!sel){
+alert("Please select an answer!");
+return;
+}
 
 let cur = qs[i];
 let correct = cur.o[cur.a];
 
-if(sel.value === correct) score++;
+if(sel.value === correct){
+score++;
+}
 
 i++;
 
